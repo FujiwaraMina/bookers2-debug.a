@@ -1,0 +1,14 @@
+<h2><% @another_entry.user.name %>さんとのチャット</h2>
+
+<% @messages.each do |m| %>
+  <% if m.user_id == current_user.id %>
+  <%= m.body %>
+  <% else %>
+  <p>メッセージはまだありません</p>
+  <% end %>
+<% end %>
+
+<%=form_with model:@message do |f| %>
+  <%= f.text_field :body %>
+  <%= f.submit "送信する" %>
+<% end %>
