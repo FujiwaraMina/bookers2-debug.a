@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   has_many :book_comments,dependent: :destroy
   has_many :favorites,dependent: :destroy
+  has_many :favorited_books, through: :favorites,source: :book
 
   # フォローをした、されたの関係
 has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -48,6 +49,13 @@ has_many :following_user, through: :follower, source: :followed
       @user = User.where("name LIKE?","%#{word}%")
     else
       @user = User.all
+    end
+  end
+
+  def self.guest
+    find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "guestuser"
     end
   end
 end
