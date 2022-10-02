@@ -74,11 +74,11 @@ ActiveRecord::Schema.define(version: 2022_10_01_053719) do
 
   create_table "messages", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "romm_id", null: false
+    t.integer "room_id", null: false
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["romm_id"], name: "index_messages_on_romm_id"
+    t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
@@ -112,6 +112,6 @@ ActiveRecord::Schema.define(version: 2022_10_01_053719) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "entries", "rooms"
   add_foreign_key "entries", "users"
-  add_foreign_key "messages", "romms"
+  add_foreign_key "messages", "rooms"
   add_foreign_key "messages", "users"
 end

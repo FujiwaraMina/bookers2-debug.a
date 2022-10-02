@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "home/about"=>"homes#about"
 
   resources :messages, only: [:create]
-  resources :rooms, only: [:create,:index,:show]
+  resources :rooms, only: [:create,:show]
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resources :book_comments,only:[:create,:destroy]
     resource :favorites,only:[:create,:destroy]

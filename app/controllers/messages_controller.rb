@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_action :authenticate_user!
+ before_action :authenticate_user!, :only => [:create]
 
   def create
     message = Message.new(message_params)
@@ -16,4 +16,4 @@ class MessagesController < ApplicationController
     def message_params
       params.require(:message).permit(:room_id, :body)
     end
-end 
+end
